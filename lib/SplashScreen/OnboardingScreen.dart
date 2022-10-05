@@ -28,8 +28,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Image.network(
                 item,
                 fit: BoxFit.cover,
-                width: 280.0,
-                height: 400,
+                height: 390,
               ),
             ],
           )))
@@ -45,7 +44,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: [
               Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.1),
+                      top: MediaQuery.of(context).size.height * 0.05),
                   child: Image.asset("assets/images/logo.png")),
               Padding(
                   padding: const EdgeInsets.only(top: 40),
@@ -66,10 +65,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 items: imageSliders,
                 carouselController: _controller,
                 options: CarouselOptions(
-                    height: 340.0,
+                    height: 390.0,
                     enlargeCenterPage: true,
                     autoPlay: true,
-                    autoPlayCurve: Curves.fastOutSlowIn,
                     enableInfiniteScroll: true,
                     onPageChanged: (index, reason) {
                       setState(() {
@@ -82,18 +80,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: imgList.asMap().entries.map((entry) {
                   return GestureDetector(
                     onTap: () => _controller.animateToPage(entry.key),
-                    child: Container(
-                      width: 10.0,
-                      height: 10.0,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 4.0),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: (Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.white
-                                  : Colors.black)
-                              .withOpacity(_current == entry.key ? 0.9 : 0.1)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Container(
+                        width: 8.0,
+                        height: 8.0,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 4.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(width: 1, color: primaryColor),
+                            color: (Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.white
+                                    : primaryColor)
+                                .withOpacity(_current == entry.key ? 0.9 : 0)),
+                      ),
                     ),
                   );
                 }).toList(),

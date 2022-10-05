@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rayy/SplashScreen/GoogleSignIn/GoogleSignInBloc.dart';
+import 'package:rayy/SplashScreen/GoogleSignIn/Test.dart';
 import 'package:rayy/Style/Theme.dart';
 
 class OnboardingScreen1 extends StatefulWidget {
@@ -10,9 +12,11 @@ class OnboardingScreen1 extends StatefulWidget {
 }
 
 class _OnboardingScreen1State extends State<OnboardingScreen1> {
+  GoogleSignInBloc bloc = GoogleSignInBloc();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(14),
         child: SafeArea(
@@ -29,19 +33,19 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
             const SizedBox(
               height: 30,
             ),
-            const Text(
+            Text(
               "Get Started with Rayy Tech",
               style: TextStyle(
                   fontStyle: FontStyle.normal,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
-                  color: Color(0xff0312A91)),
+                  color: primaryColor),
             ),
             const SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum porta ipsumLorem ipsum dolor/",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -49,45 +53,58 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
-                  color: Color(0xff0312A91)),
+                  color: primaryColor),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 26),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const OnboardingScreen1()));
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset("assets/images/google.png"),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Sign Up with Google',
-                        style: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                            color: Colors.white),
+            StreamBuilder<User?>(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasData) {
+                    Future.delayed(Duration.zero, () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Test()));
+                    });
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 26),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          bloc.googleLogin();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/google.png"),
+                            const SizedBox(width: 8),
+                            const Text(
+                              'Sign Up with Google',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Lato',
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12,
+                                  color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(8), // <-- Radius
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8), // <-- Radius
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  );
+                }),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -98,8 +115,8 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
                       height: 50,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Already have an account? ",
                             style: TextStyle(
                                 fontFamily: 'Lato',
@@ -117,7 +134,7 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14,
-                                  color: Color(0xff0312A91)),
+                                  color: primaryColor),
                             ),
                           )
                         ],
