@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rayy/SplashScreen/OnboardingScreen1.dart';
 import 'package:rayy/Style/Theme.dart';
 
@@ -33,11 +34,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ],
           )))
       .toList();
+  @override
+  void initState() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff09FFFF8),
+        systemNavigationBarColor: Color(0xff09FFFF8),
+        statusBarIconBrightness: Brightness.light));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff09FFFF8),
+      backgroundColor: Color(0xff09FFFF8),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -48,7 +57,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Image.asset("assets/images/logo.png")),
               Padding(
                   padding: const EdgeInsets.only(top: 40),
-                  child: Image.asset("assets/images/longTitle.png")),
+                  child: Text(
+                    "Earn Real Money",
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22,
+                        color: primaryColor),
+                  )),
               Padding(
                 padding: const EdgeInsets.only(top: 14, left: 20, right: 20),
                 child: SizedBox(

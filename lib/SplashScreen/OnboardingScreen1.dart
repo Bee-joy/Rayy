@@ -18,6 +18,15 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
   GoogleSignInBloc bloc = GoogleSignInBloc();
   bool googleLoginSuccess = false;
   @override
+  void initState() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        systemNavigationBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
