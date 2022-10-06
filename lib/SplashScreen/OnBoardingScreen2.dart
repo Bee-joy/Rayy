@@ -16,8 +16,7 @@ class _OnboardingScreen2State extends State<OnboardingScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Form(
+      body: Form(
         key: _formKey,
         child: Column(
           children: [
@@ -97,7 +96,7 @@ class _OnboardingScreen2State extends State<OnboardingScreen2> {
             )
           ],
         ),
-      )),
+      ),
     );
   }
 }

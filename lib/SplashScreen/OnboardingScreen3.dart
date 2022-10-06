@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rayy/Style/Theme.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   String contactNumber;
   OnboardingScreen3(this.contactNumber, {Key? key}) : super(key: key);
+  FocusNode textFieldOne = FocusNode();
+  FocusNode textFieldTwo = FocusNode();
+  FocusNode textFieldThree = FocusNode();
+  FocusNode textFieldFour = FocusNode();
+  FocusNode verify = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-          child: Column(
+      body: Column(
         children: [
           Padding(
             padding:
@@ -40,7 +45,7 @@ class OnboardingScreen3 extends StatelessWidget {
                       children: [
                         WidgetSpan(
                           child: Padding(
-                              padding: EdgeInsets.only(top: 8, bottom: 5),
+                              padding: EdgeInsets.only(top: 5, bottom: 5),
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
@@ -76,6 +81,23 @@ class OnboardingScreen3 extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextFormField(
+                    autofocus: true,
+                    onChanged: (_) {
+                      textFieldTwo.requestFocus();
+                    },
+                    focusNode: textFieldOne,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'DM Sans',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 32,
+                        color: primaryColor),
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                     ),
@@ -86,6 +108,23 @@ class OnboardingScreen3 extends StatelessWidget {
                 ),
                 Expanded(
                   child: TextFormField(
+                    autofocus: true,
+                    onChanged: (_) {
+                      textFieldThree.requestFocus();
+                    },
+                    focusNode: textFieldTwo,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'DM Sans',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 32,
+                        color: primaryColor),
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                     ),
@@ -96,6 +135,23 @@ class OnboardingScreen3 extends StatelessWidget {
                 ),
                 Expanded(
                   child: TextFormField(
+                    autofocus: true,
+                    onChanged: (_) {
+                      textFieldFour.requestFocus();
+                    },
+                    focusNode: textFieldThree,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'DM Sans',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 32,
+                        color: primaryColor),
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                     ),
@@ -106,6 +162,23 @@ class OnboardingScreen3 extends StatelessWidget {
                 ),
                 Expanded(
                   child: TextFormField(
+                    onChanged: (_) {
+                      verify.requestFocus();
+                    },
+                    autofocus: true,
+                    focusNode: textFieldFour,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'DM Sans',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 32,
+                        color: primaryColor),
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                     ),
@@ -145,11 +218,13 @@ class OnboardingScreen3 extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
+                padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 50,
                   child: ElevatedButton(
+                    focusNode: verify,
+                    autofocus: true,
                     onPressed: () {},
                     child: const Text('Verify Code'),
                     style: ElevatedButton.styleFrom(
@@ -225,7 +300,7 @@ class OnboardingScreen3 extends StatelessWidget {
                 ),
           ),
         ],
-      )),
+      ),
     );
   }
 }

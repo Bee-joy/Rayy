@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rayy/SplashScreen/GoogleSignIn/GoogleSignInBloc.dart';
 import 'package:rayy/SplashScreen/GoogleSignIn/Test.dart';
+import 'package:rayy/SplashScreen/OnBoardingScreen2.dart';
 import 'package:rayy/Style/Theme.dart';
 
 class OnboardingScreen1 extends StatefulWidget {
@@ -13,6 +16,7 @@ class OnboardingScreen1 extends StatefulWidget {
 
 class _OnboardingScreen1State extends State<OnboardingScreen1> {
   GoogleSignInBloc bloc = GoogleSignInBloc();
+  bool googleLoginSuccess = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,12 +65,29 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
-                  if (snapshot.hasData) {
+                  if (snapshot.hasData && !googleLoginSuccess) {
                     Future.delayed(Duration.zero, () {
+                      final user = FirebaseAuth.instance.currentUser!;
+                      var email = user.email;
+                      var uid = user.uid;
+
+                      Fluttertoast.showToast(
+                          msg: "email : $email \n uid : $uid ",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.black,
+                          textColor: Colors.white,
+                          fontSize: 14.0);
+                      googleLoginSuccess = true;
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const Test()));
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Test()));
+                              builder: (context) => const OnboardingScreen2()));
                     });
                   }
                   return Padding(
