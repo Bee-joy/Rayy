@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rayy/SplashScreen/GoogleSignIn/CustomFormField.dart';
 import 'package:rayy/Style/Theme.dart';
 
 class OnboardingScreen3 extends StatefulWidget {
@@ -93,110 +94,70 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
               child: Row(
                 children: [
                   Expanded(
-                    child: TextFormField(
-                      autofocus: true,
-                      onChanged: (_) {
-                        textFieldTwo.requestFocus();
-                      },
-                      focusNode: textFieldOne,
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                        LengthLimitingTextInputFormatter(1)
-                      ],
-                      style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontFamily: 'DM Sans',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 32,
-                          color: primaryColor),
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                      ),
-                    ),
-                  ),
+                      child: CustomFormField(
+                    autoFocus: true,
+                    keyboardType: TextInputType.phone,
+                    obscureText: false,
+                    onChanged: (_) {
+                      textFieldTwo.requestFocus();
+                    },
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    focusNode: textFieldOne,
+                  )),
                   const SizedBox(
                     width: 10,
                   ),
                   Expanded(
-                    child: TextFormField(
-                      autofocus: true,
-                      onChanged: (_) {
-                        textFieldThree.requestFocus();
-                      },
-                      focusNode: textFieldTwo,
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                        LengthLimitingTextInputFormatter(1)
-                      ],
-                      style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontFamily: 'DM Sans',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 32,
-                          color: primaryColor),
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                      ),
-                    ),
-                  ),
+                      child: CustomFormField(
+                    autoFocus: true,
+                    keyboardType: TextInputType.phone,
+                    obscureText: false,
+                    onChanged: (_) {
+                      textFieldThree.requestFocus();
+                    },
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    focusNode: textFieldTwo,
+                  )),
                   const SizedBox(
                     width: 10,
                   ),
                   Expanded(
-                    child: TextFormField(
-                      autofocus: true,
-                      onChanged: (_) {
-                        textFieldFour.requestFocus();
-                      },
-                      focusNode: textFieldThree,
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                        LengthLimitingTextInputFormatter(1)
-                      ],
-                      style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontFamily: 'DM Sans',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 32,
-                          color: primaryColor),
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                      ),
-                    ),
-                  ),
+                      child: CustomFormField(
+                    autoFocus: true,
+                    keyboardType: TextInputType.phone,
+                    obscureText: false,
+                    onChanged: (_) {
+                      textFieldFour.requestFocus();
+                    },
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    focusNode: textFieldThree,
+                  )),
                   const SizedBox(
                     width: 10,
                   ),
                   Expanded(
-                    child: TextFormField(
-                      onChanged: (_) {
-                        verify.requestFocus();
-                      },
-                      autofocus: true,
-                      focusNode: textFieldFour,
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                        LengthLimitingTextInputFormatter(1)
-                      ],
-                      style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontFamily: 'DM Sans',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 32,
-                          color: primaryColor),
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                      ),
-                    ),
-                  ),
+                      child: CustomFormField(
+                    autoFocus: true,
+                    keyboardType: TextInputType.phone,
+                    obscureText: false,
+                    onChanged: (_) {
+                      verify.requestFocus();
+                    },
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    focusNode: textFieldFour,
+                  )),
                 ],
               ),
             ),
@@ -205,19 +166,19 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   "Didn’t receive code?",
                   style: TextStyle(
                       color: Color(0xff01C1939), fontSize: 14, height: 1.5),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Text(
                   "Resend Code",
                   style: TextStyle(
-                      color: Color(0xff0312A91),
+                      color: primaryColor,
                       fontSize: 14,
                       height: 1.5,
                       decoration: TextDecoration.underline,
